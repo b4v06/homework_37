@@ -30,6 +30,17 @@ export function showDetails() {
     info.classList.remove('hidden');
 }
 
+function fillModal(main, visibility) {
+    const { pressure } = main;
+    const { temp_max } = main;
+    const { temp_min } = main;
+
+    document.getElementById("pressure").textContent = pressure;
+    document.getElementById("visibility").textContent = visibility;
+    document.getElementById("temp-max").textContent = temp_max;
+    document.getElementById("temp-min").textContent = temp_min;
+}
+
 export function fillDetails(response) {
     const {
         cod,
@@ -39,6 +50,7 @@ export function fillDetails(response) {
         weather,
         main,
         wind,
+        visibility,
     } = response
 
     if (cod === "404") {
@@ -50,5 +62,6 @@ export function fillDetails(response) {
     fillTemperature(weather, main);
     fillWindAndHumidity(main, wind);
     showDetails()
+    fillModal(main, visibility)
 }
 
